@@ -1,40 +1,44 @@
-/*
- 
-DEVENGAGE-92:  Removed the 'maxItems','minItems' elements from the inferredProperties.array value.  This was to fix a problem where
-the ValidationList contained mixItems and maxItems properties.  This was triggering the JSON Schema faker to think these elements were
-arrays.  I talked with Tim and we are removing these elements.
-
-*/
 const inferredProperties = {
-  array: ["additionalItems", "items", "uniqueItems"],
+  array: [
+    'additionalItems',
+    'items',
+    'maxItems',
+    'minItems',
+    'uniqueItems',
+  ],
   integer: [
-    "exclusiveMaximum",
-    "exclusiveMinimum",
-    "maximum",
-    "minimum",
-    "multipleOf",
+    'exclusiveMaximum',
+    'exclusiveMinimum',
+    'maximum',
+    'minimum',
+    'multipleOf',
   ],
   object: [
-    "additionalProperties",
-    "dependencies",
-    "maxProperties",
-    "minProperties",
-    "patternProperties",
-    "properties",
-    "required",
+    'additionalProperties',
+    'dependencies',
+    'maxProperties',
+    'minProperties',
+    'patternProperties',
+    'properties',
+    'required',
   ],
-  string: ["maxLength", "minLength", "pattern", "format"],
+  string: [
+    'maxLength',
+    'minLength',
+    'pattern',
+    'format',
+  ],
 };
 
 inferredProperties.number = inferredProperties.integer;
 
 const subschemaProperties = [
-  "additionalItems",
-  "items",
-  "additionalProperties",
-  "dependencies",
-  "patternProperties",
-  "properties",
+  'additionalItems',
+  'items',
+  'additionalProperties',
+  'dependencies',
+  'patternProperties',
+  'properties',
 ];
 
 /**
@@ -47,18 +51,16 @@ const subschemaProperties = [
  * @returns {boolean}
  */
 function matchesType(obj, lastElementInPath, inferredTypeProperties) {
-  return (
-    Object.keys(obj).filter((prop) => {
-      const isSubschema = subschemaProperties.indexOf(lastElementInPath) > -1;
-      const inferredPropertyFound = inferredTypeProperties.indexOf(prop) > -1;
+  return Object.keys(obj).filter(prop => {
+    const isSubschema = subschemaProperties.indexOf(lastElementInPath) > -1;
+    const inferredPropertyFound = inferredTypeProperties.indexOf(prop) > -1;
 
-      if (inferredPropertyFound && !isSubschema) {
-        return true;
-      }
+    if (inferredPropertyFound && !isSubschema) {
+      return true;
+    }
 
-      return false;
-    }).length > 0
-  );
+    return false;
+  }).length > 0;
 }
 
 /**
