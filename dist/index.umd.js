@@ -1,5 +1,5 @@
 /*!
- * json-schema-faker v0.5.2
+ * json-schema-faker v0.5.1-rc17
  * (c) Alvaro Cabrera <pateketrueke@gmail.com> (https://soypache.co)
  * Released under the MIT License.
  */
@@ -18918,14 +18918,21 @@
     return ParseError;
   }(Error));
 
+  /*
+   
+  DEVENGAGE-92:  Removed the 'maxItems','minItems' elements from the inferredProperties.array value.  This was to fix a problem where
+  the ValidationList contained mixItems and maxItems properties.  This was triggering the JSON Schema faker to think these elements were
+  arrays.  I talked with Tim and we are removing these elements.
+
+  */
   var inferredProperties = {
-    array: ['additionalItems', 'items', 'maxItems', 'minItems', 'uniqueItems'],
-    integer: ['exclusiveMaximum', 'exclusiveMinimum', 'maximum', 'minimum', 'multipleOf'],
-    object: ['additionalProperties', 'dependencies', 'maxProperties', 'minProperties', 'patternProperties', 'properties', 'required'],
-    string: ['maxLength', 'minLength', 'pattern', 'format']
+    array: ["additionalItems", "items", "uniqueItems"],
+    integer: ["exclusiveMaximum", "exclusiveMinimum", "maximum", "minimum", "multipleOf"],
+    object: ["additionalProperties", "dependencies", "maxProperties", "minProperties", "patternProperties", "properties", "required"],
+    string: ["maxLength", "minLength", "pattern", "format"]
   };
   inferredProperties.number = inferredProperties.integer;
-  var subschemaProperties = ['additionalItems', 'items', 'additionalProperties', 'dependencies', 'patternProperties', 'properties'];
+  var subschemaProperties = ["additionalItems", "items", "additionalProperties", "dependencies", "patternProperties", "properties"];
   /**
    * Iterates through all keys of `obj` and:
    * - checks whether those keys match properties of a given inferred type
