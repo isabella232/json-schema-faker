@@ -16,6 +16,12 @@
 
 > Use [JSON Schema](http://json-schema.org/draft-04/json-schema-core.html) along with fake generators to provide consistent and meaningful fake data for your system.
 
+## WARNING: READ BEFORE MODIFYING THE CODE IN THIS REPO
+
+A previous developer made several changes to the dist/index.js file and added new code. We are going to need to either back that code back into this main source files or completely replace this process when we move to OpenAPI 3. As a result running the npm build:dist will cause breaking changes because it overwrites the dist/files.
+
+For DEVENGAGE-92: Changes were made to both the originating source and the dist, but talk to Tim Smith or John Carnell before doing any work on this repo.
+
 ## What's next?
 
 On `RC17` support for more keywords landed, but is still outdated from recent JSON-Schema drafts.
@@ -34,9 +40,9 @@ Since `RC16` comes with some deprecations and breaking-changes towards `v0.5.x` 
 
 ## Contributors
 
-* [Alvaro Cabrera](https://twitter.com/pateketrueke)
-* [Tomasz Ducin](https://twitter.com/tomasz_ducin)
-* artwork by [Ajay Karat](http://www.devilsgarage.com/)
+- [Alvaro Cabrera](https://twitter.com/pateketrueke)
+- [Tomasz Ducin](https://twitter.com/tomasz_ducin)
+- artwork by [Ajay Karat](http://www.devilsgarage.com/)
 
 > We are more than happy to welcome new contributors, our project is still being developed, but we need more feedback!
 >
